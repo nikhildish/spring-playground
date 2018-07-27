@@ -19,7 +19,7 @@ public class MathControllerTests {
     MockMvc mvc;
 
     @Test
-    public void testMathpiGetValue()
+    public void testPiEndPoint()
      throws Exception
     {
         RequestBuilder request= MockMvcRequestBuilders.get("/math/pi");
@@ -29,7 +29,7 @@ public class MathControllerTests {
                 .andExpect(content().string("3.141592653589793"));
 }
     @Test
-    public void testcalculate_add()
+    public void testCalculateEndPoint_add()
             throws Exception
     {
         RequestBuilder request= MockMvcRequestBuilders.get("/math/calculate?operation=add&x=5&y=3");
@@ -40,7 +40,7 @@ public class MathControllerTests {
     }
 
     @Test
-    public void testCalculate_substract()
+    public void testCalculateEndPoint_substract()
             throws Exception
     {
         RequestBuilder request= MockMvcRequestBuilders.get("/math/calculate?operation=substract&x=5&y=3");
@@ -50,7 +50,7 @@ public class MathControllerTests {
                 .andExpect(content().string("2"));
     }
     @Test
-    public void testCalculate_multiply()
+    public void testCalculateEndPoint_multiply()
             throws Exception
     {
         RequestBuilder request= MockMvcRequestBuilders.get("/math/calculate?operation=multiply&x=5&y=3");
@@ -60,7 +60,7 @@ public class MathControllerTests {
                 .andExpect(content().string("15"));
     }
     @Test
-    public void testCalculate_divide()
+    public void testCalculateEndPoint_divide()
             throws Exception
     {
         RequestBuilder request= MockMvcRequestBuilders.get("/math/calculate?operation=divide&x=15&y=3");
@@ -71,7 +71,7 @@ public class MathControllerTests {
     }
 
     @Test
-    public void testSum()
+    public void testSumEndPoint()
             throws Exception
     {
         RequestBuilder request= MockMvcRequestBuilders.post("/math/sum?n=10&n=6&n=5&n=2");
