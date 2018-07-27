@@ -9,6 +9,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -22,7 +23,7 @@ public class MathControllerTests {
     public void testPiEndPoint()
      throws Exception
     {
-        RequestBuilder request= MockMvcRequestBuilders.get("/math/pi");
+        RequestBuilder request= get("/math/pi");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -32,7 +33,7 @@ public class MathControllerTests {
     public void testCalculateEndPoint_add()
             throws Exception
     {
-        RequestBuilder request= MockMvcRequestBuilders.get("/math/calculate?operation=add&x=5&y=3");
+        RequestBuilder request= get("/math/calculate?operation=add&x=5&y=3");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -43,7 +44,7 @@ public class MathControllerTests {
     public void testCalculateEndPoint_substract()
             throws Exception
     {
-        RequestBuilder request= MockMvcRequestBuilders.get("/math/calculate?operation=substract&x=5&y=3");
+        RequestBuilder request= get("/math/calculate?operation=substract&x=5&y=3");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -53,7 +54,7 @@ public class MathControllerTests {
     public void testCalculateEndPoint_multiply()
             throws Exception
     {
-        RequestBuilder request= MockMvcRequestBuilders.get("/math/calculate?operation=multiply&x=5&y=3");
+        RequestBuilder request= get("/math/calculate?operation=multiply&x=5&y=3");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -63,7 +64,7 @@ public class MathControllerTests {
     public void testCalculateEndPoint_divide()
             throws Exception
     {
-        RequestBuilder request= MockMvcRequestBuilders.get("/math/calculate?operation=divide&x=15&y=3");
+        RequestBuilder request= get("/math/calculate?operation=divide&x=15&y=3");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -80,4 +81,17 @@ public class MathControllerTests {
                 .andExpect(status().isOk())
                 .andExpect(content().string("23"));
     }
+
+    @Test
+    public void testVolumeEndPoint()
+            throws Exception
+    {
+        RequestBuilder request= MockMvcRequestBuilders.post("/math/volume/10/10/10");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("The volume of a 10 x 10 x 10 rectangle is 1000"));
+    }
+
+
 }

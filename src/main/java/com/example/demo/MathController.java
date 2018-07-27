@@ -38,7 +38,7 @@ public class MathController {
      return result;
     }
     @PostMapping("/sum")
-    public int getSum(@RequestParam MultiValueMap<String, String> querystring)
+    public int postSum(@RequestParam MultiValueMap<String, String> querystring)
     {
         int result = 0;
     try {
@@ -49,11 +49,17 @@ public class MathController {
                 result = mathService.getCalulatedSum(querystring);
             }
         } catch (Exception ex) {
-            System.out.println("Exception in getSum: " + ex.getMessage());
+            System.out.println("Exception in postSum: " + ex.getMessage());
 
         }
         return result;
 
+    }
+
+    @PostMapping("/volume/{length}/{width}/{height}")
+    public String postVolume(@PathVariable int length,@PathVariable int width,@PathVariable int height)
+    {
+        return mathService.getCalculatedVolume(length,width,height);
     }
 }
 

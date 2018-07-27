@@ -63,6 +63,13 @@ public class MathService {
         return result;
 
     }
+
+    public String getCalculatedVolume(int length, int width, int height)
+    {
+
+        return String.format("The volume of a %d x %d x %d rectangle is %d",length,width,height,length*width*height);
+    }
+
     public String getPi() {
         return "3.141592653589793";
     }
