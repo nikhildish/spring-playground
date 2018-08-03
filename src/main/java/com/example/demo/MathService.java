@@ -70,6 +70,41 @@ public class MathService {
         return String.format("The volume of a %d x %d x %d rectangle is %d",length,width,height,length*width*height);
     }
 
+    public String getCalculatedArea(String type, int radius, int width,int height)
+    {
+        String result = "";
+            try {
+
+                switch (type) {
+                    case "circle":
+                        if (radius == 0)
+                            result = "Invalid" ;
+                        else
+                        result =  String.format("Area of a circle with a radius of %d is %f",radius, Double.parseDouble(getPi())*radius*radius);
+                        break;
+
+                    case "rectangle":
+                        if (width == 0 || height == 0 )
+                            result = "Invalid" ;
+                        else
+                        result =  String.format("Area of a %d x %d rectangle is %d",width, height,width*height);
+                        break;
+                    default:
+                        result  = "Invalid";
+                }
+
+
+            } catch (Exception ex) {
+                System.out.println("Exception in getCalculatedArea: " + ex.getMessage());
+
+            }
+
+           return result;
+        }
+
+
+
+
     public String getPi() {
         return "3.141592653589793";
     }
