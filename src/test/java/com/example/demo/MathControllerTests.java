@@ -4,12 +4,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -75,7 +78,7 @@ public class MathControllerTests {
     public void testSumEndPoint()
             throws Exception
     {
-        RequestBuilder request= MockMvcRequestBuilders.post("/math/sum?n=10&n=6&n=5&n=2");
+        RequestBuilder request= post("/math/sum?n=10&n=6&n=5&n=2");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -86,7 +89,7 @@ public class MathControllerTests {
     public void testVolumeEndPoint()
             throws Exception
     {
-        RequestBuilder request= MockMvcRequestBuilders.post("/math/volume/10/10/10");
+        RequestBuilder request= post("/math/volume/10/10/10");
 
         this.mvc.perform(request)
                 .andExpect(status().isOk())
@@ -94,4 +97,72 @@ public class MathControllerTests {
     }
 
 
+    @Test
+    public void testAreaEndPoint_Circle()
+            throws Exception
+    {
+        MockHttpServletRequestBuilder request = post("/math/area")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("type","circle")
+                .param("radius","4");
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Area of a circle with a radius of 4 is 50.265482"));
+}
+
+    @Test
+    public void testAreaEndPoint_rectangle()
+            throws Exception
+    {
+        MockHttpServletRequestBuilder request = post("/math/area")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("type","rectangle")
+                .param("width","4")
+                .param("height","6");
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Area of a 4 x 6 rectangle is 24"));
+    }
+
+    @Test
+    public void testAreaEndPoint_rectangle_Invalid()
+            throws Exception
+    {
+        MockHttpServletRequestBuilder request = post("/math/area")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("type","circle")
+                .param("width","4")
+                .param("height","6");
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Invalid"));
+    }
+
+    @Test
+    public void testAreaEndPoint_rectangle_Invalid_Zero_width()
+            throws Exception
+    {
+        MockHttpServletRequestBuilder request = post("/math/area")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("type","rectangle")
+                .param("width","0")
+                .param("height","6");
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Invalid"));
+    }
+
+    @Test
+    public void testAreaEndPoint_circle_Invalid_Zero_radius()
+            throws Exception
+    {
+        MockHttpServletRequestBuilder request = post("/math/area")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                .param("type","circle")
+                .param("radius","0");
+
+        this.mvc.perform(request)
+                .andExpect(status().isOk())
+                .andExpect(content().string("Invalid"));
+    }
 }
