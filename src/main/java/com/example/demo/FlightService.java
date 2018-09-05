@@ -1,10 +1,6 @@
 package com.example.demo;
 import org.springframework.stereotype.Service;
-import org.springframework.util.MultiValueMap;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Date;
 
@@ -53,5 +49,16 @@ public class FlightService {
         flight2.setTickets(Arrays.asList(ticket2));
 
         return Arrays.asList(flight1,flight2);
+    }
+
+    public int getTicketTotal(FlightTicket flightTicket)
+    {
+        int price = 0;
+
+        List<Details> listTickets = flightTicket.getTickets();
+        for(Details val : listTickets ){
+            price += val.getPrice();
+        }
+        return price;
     }
 }

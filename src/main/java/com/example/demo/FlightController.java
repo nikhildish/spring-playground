@@ -1,15 +1,11 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.MediaType;
 
-import java.awt.*;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 public class FlightController {
@@ -31,6 +27,16 @@ public class FlightController {
     {
         // System.out.println(objectMapper.writeValueAsString(flightService.getFlights()));
         return flightService.getFlights();
+    }
+
+   @RequestMapping(value = "/flights/tickets/total", method = {RequestMethod.POST},
+            consumes = "application/json", produces = "application/json")
+    public @ResponseBody Result postTotal(@RequestBody FlightTicket flightTicket) {
+
+       Result result = new Result();
+       result.setResult(flightService.getTicketTotal(flightTicket));
+       return result;
+
     }
 
 }
