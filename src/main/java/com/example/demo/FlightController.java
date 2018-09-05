@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/flights")
 public class FlightController {
 
     @Autowired
@@ -20,10 +19,17 @@ public class FlightController {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    @GetMapping("/flight")
+    @GetMapping("/flights/flight")
     public Flight getFlight() throws Exception
     {
        // System.out.println(objectMapper.writeValueAsString(flightService.getFlights()));
+        return flightService.getFlight();
+    }
+
+    @GetMapping("/flights")
+    public List<Flight> getFlights() throws Exception
+    {
+        // System.out.println(objectMapper.writeValueAsString(flightService.getFlights()));
         return flightService.getFlights();
     }
 
