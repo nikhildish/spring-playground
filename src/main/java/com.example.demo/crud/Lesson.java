@@ -1,6 +1,8 @@
 package com.example.demo.crud;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -17,6 +19,7 @@ public class Lesson {
 
     @Column(columnDefinition = "date")
     @JsonFormat(pattern = "yyyy-MM-dd")
+    @JsonIgnore()
     private Date deliveredOn;
 
     public Long getId() {
@@ -35,11 +38,9 @@ public class Lesson {
         this.title = title;
     }
 
-    public Date getDeliveredOn() {
-        return deliveredOn;
-    }
+//    public Date getDeliveredOn() {
+//        return deliveredOn;
+//    }
 
-    public void setDeliveredOn(Date deliveredOn) {
-        this.deliveredOn = deliveredOn;
-    }
+
 }

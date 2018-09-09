@@ -1,5 +1,6 @@
 package com.example.demo.crud;
 
+import org.jboss.logging.Param;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +21,20 @@ public class LessonsController {
     @PostMapping("")
     public Lesson create(@RequestBody Lesson lesson) {
         return this.repository.save(lesson);
+    }
+
+   @GetMapping("/{id}")
+    public Lesson getLesson(@PathVariable Long id)
+   {
+       return this.repository.findById(id).get();
+
+   }
+
+    @DeleteMapping("/{id}")
+    public void deleteLesson(@PathVariable Long id)
+    {
+         this.repository.deleteById(id);
+
     }
 
 }
