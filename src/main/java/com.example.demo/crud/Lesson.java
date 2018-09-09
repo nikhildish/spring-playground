@@ -17,11 +17,11 @@ public class Lesson {
     private String title;
 
 
-    @Column(columnDefinition = "date")
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @JsonIgnore()
+    @Column(name = "deliveredon")
+    @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat
+            (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date deliveredOn;
-
     public Long getId() {
         return id;
     }
@@ -38,9 +38,11 @@ public class Lesson {
         this.title = title;
     }
 
-//    public Date getDeliveredOn() {
-//        return deliveredOn;
-//    }
+    public Date getDeliveredOn() {
+        return deliveredOn;
+    }
 
-
+    public void setDeliveredOn(Date deliveredOn) {
+        this.deliveredOn = deliveredOn;
+    }
 }

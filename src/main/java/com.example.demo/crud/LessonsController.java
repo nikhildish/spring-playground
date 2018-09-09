@@ -37,4 +37,14 @@ public class LessonsController {
 
     }
 
+    @PatchMapping("/{id}")
+    public Lesson patchLesson(@PathVariable Long id, @RequestBody Lesson lesson){
+        Lesson thisLesson = repository.findById(id).get();
+
+        thisLesson.setTitle(lesson.getTitle());
+        thisLesson.setDeliveredOn(lesson.getDeliveredOn());
+
+        return this.repository.save(thisLesson);
+    }
+
 }
