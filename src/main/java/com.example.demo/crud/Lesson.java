@@ -18,9 +18,8 @@ public class Lesson {
 
 
     @Column(name = "deliveredon")
-    @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat
-            (shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @Temporal(TemporalType.DATE)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date deliveredOn;
     public Long getId() {
         return id;
@@ -44,5 +43,14 @@ public class Lesson {
 
     public void setDeliveredOn(Date deliveredOn) {
         this.deliveredOn = deliveredOn;
+    }
+
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", deliveredOn='" + deliveredOn + '\'' +
+                '}';
     }
 }

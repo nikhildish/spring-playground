@@ -1,7 +1,11 @@
 package com.example.demo.crud;
 
 import org.jboss.logging.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+import java.util.List;
 
 @RestController
 @RequestMapping("/lessons")
@@ -45,6 +49,18 @@ public class LessonsController {
         thisLesson.setDeliveredOn(lesson.getDeliveredOn());
 
         return this.repository.save(thisLesson);
+    }
+
+    @GetMapping("/find/{title}")
+    public Lesson findByTitle(@PathVariable String title){
+        return this.repository.findByTitle(title);
+    }
+
+    @GetMapping("/between")
+    public List<Lesson> findLessonsBetweenDates(
+            @RequestParam(value = "date1") @DateTimeFormat(pattern="yyyy-MM-dd")Date date1,
+            @RequestParam(value = "date2") @DateTimeFormat(pattern="yyyy-MM-dd")Date date2){
+        return this.repository.findLessonsBetweenDates(date1,date2);
     }
 
 }
