@@ -90,7 +90,7 @@ public class LessonControllerTest {
     }
 
     @Test
-    public void testGET() throws Exception {
+    public void testGet() throws Exception {
         Lesson lesson = new Lesson();
         lesson.setTitle("Spring Security");
         repository.save(lesson);
@@ -104,7 +104,7 @@ public class LessonControllerTest {
     }
 
     @Test
-    public void testGETById() throws Exception {
+    public void testGetById() throws Exception {
 
 
         MockHttpServletRequestBuilder request = get("/lessons/1")
