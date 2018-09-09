@@ -39,6 +39,19 @@ public class FlightController {
 
     }
 
+//    @RequestMapping(value = "/flights/tickets/total", method = {RequestMethod.POST},
+//            consumes = "application/json", produces = "application/json")
+//    public @ResponseBody Result postTotal1(@RequestBody FlightTicket flightTicket) {
+//
+//        Result result = new Result();
+//        result.setResult(flightService.getTicketTotal(flightTicket));
+//        return result;
+//
+//    }
+
+
+
+
 }
 
 
