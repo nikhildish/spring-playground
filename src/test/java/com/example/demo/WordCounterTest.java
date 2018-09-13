@@ -20,6 +20,7 @@ import static org.hamcrest.Matchers.is;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
+
 @TestPropertySource(properties = {
         "wordCount.caseSensitive=true",
         "wordCount.words.skip[0]=the",
