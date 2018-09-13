@@ -4,6 +4,7 @@ import org.hamcrest.collection.IsMapContaining;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -27,6 +28,8 @@ import static org.hamcrest.Matchers.is;
         "wordCount.words.skip[1]=an",
         "wordCount.words.skip[2]=a",
 })
+
+@AutoConfigureMockMvc(secure=false)
 public class WordCounterTest {
     @Autowired
     WordCounterConfigProperties countConfigProperties;
